@@ -65,10 +65,15 @@ public class BinarySearch {
 			System.out.println("What number would you like to find (1-1000)?");
 			if (userInput.hasNextInt()){
 				userInputInt = userInput.nextInt();
-				searchForVal(sortedNumberSet, userInputInt);
+				if ((userInputInt>0)&&(userInputInt<1001)){
+					searchForVal(sortedNumberSet, userInputInt);
+				}
+				else{
+					System.out.println("That is not a number between 1-1000.");
+				}
 			}
 			else {
-				System.out.println("That is not a number between 1-1000.");
+				System.out.println("That is not a number.");
 				break;
 			}
 		}
