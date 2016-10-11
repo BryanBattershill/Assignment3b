@@ -16,7 +16,7 @@ public class BinarySearch {
 			
 			for (int counter2 = 0; counter2 < 250; counter2++){
 				
-				if ((array[counter2] < lowestValue)||(array[counter2] == lowestValue)){
+				if (array[counter2] <= lowestValue){
 					
 					lowestValue = array[counter2];
 					indexedLowestValue = counter2;	
