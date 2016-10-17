@@ -1,3 +1,12 @@
+/****************************************************************************
+*
+* Created by: Bryan Battershill
+* Created on: Oct 2016
+* This program creates an array and sorts it from least to greates value
+* A new number can also be inputed and sorted
+*
+****************************************************************************/
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,11 +29,15 @@ public class BinarySearch {
 					
 					lowestValue = array[counter2];
 					indexedLowestValue = counter2;	
+					
 				}
 			}
+			
 			sortedArray[counter1] = lowestValue;
 			array[indexedLowestValue] = 1001;
+			
 		}
+		
 		return sortedArray;
 	}
 	
@@ -33,22 +46,30 @@ public class BinarySearch {
 		boolean wasFound = false;
 		
 		for (int counter = 0; counter < array.length; counter++){
+			
 			if (userInput == array[counter]){
 				
 				System.out.println("The number is placed at " + (counter + 1) + ".");
 				wasFound = true;
+				
 			}
 		}
+		
 		if (!wasFound){
+			
 			System.out.println("That number could not be found.");
+			
 		}
 	}
 	
 	public static int[] addNewValue(int[] array, int number){
+		
 		int[] addedArray = new int [array.length];
+		
 		addedArray = array.clone();
 		addedArray[addedArray.length - 1] = number;
 		addedArray = sortArray(addedArray);
+		
 		return addedArray;
 	}
 	
@@ -56,13 +77,18 @@ public class BinarySearch {
 		// TODO Auto-generated method stub
 		
 		Random randomNumber = new Random();
+		
 		int[] numberSet = new int[250];
 		int[] sortedNumberSet = new int[250];
-		Scanner userInput = new Scanner(System.in);
+		
 		int userInputInt;
 		
+		Scanner userInput = new Scanner(System.in);
+		
 		for (int counter = 0; counter < 250; counter++){
+			
 			numberSet[counter] = randomNumber.nextInt(1000) + 1;
+
 		}
 		
 		System.out.println(Arrays.toString(numberSet));
@@ -70,33 +96,50 @@ public class BinarySearch {
 		System.out.println(Arrays.toString(sortedNumberSet));
 		
 		while (true){
+			
 			System.out.println("What number would you like to find (1-1000)? Type 0 to add a new number.");
+			
 			if (userInput.hasNextInt()){
+				
 				userInputInt = userInput.nextInt();
+				
 				if ((userInputInt>0)&&(userInputInt<1001)){
+					
 					searchForVal(sortedNumberSet, userInputInt);
 				}
 				else if (userInputInt == 0){
+					
 					System.out.println("What number would you like to add (1-1000)?");
+					
 					if (userInput.hasNextInt()){
+						
 						userInputInt = userInput.nextInt();
+						
 						sortedNumberSet = Arrays.copyOf(sortedNumberSet, sortedNumberSet.length + 1);
-						sortedNumberSet = addNewValue(sortedNumberSet, userInputInt).clone();						
+						sortedNumberSet = addNewValue(sortedNumberSet, userInputInt).clone();		
+						
 						System.out.println("Added.");
 						System.out.println(Arrays.toString(sortedNumberSet));
+						
 					}
 					else {
+						
 						System.out.println("That is not valid.");
 						break;
+						
 					}
 				}
 				else{
+					
 					System.out.println("That is not a number between 1-1000.");
+					
 				}
 			}
 			else {
+				
 				System.out.println("That is not valid.");
 				break;
+				
 			}
 		}
 	}
