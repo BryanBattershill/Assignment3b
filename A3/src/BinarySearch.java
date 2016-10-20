@@ -42,23 +42,74 @@ public class BinarySearch {
 	}
 	
 	public static void searchForVal(int[]array, int userInput){
-
-		boolean wasFound = false;
+		int lowest = 0;
+		int highest = array.length - 1;
+		int middle = 0;
 		
-		for (int counter = 0; counter < array.length; counter++){
+		int lowerBound;
+		int upperBound;
+		int range = 1;
+		
+		while (lowest <= highest){
+			middle = (lowest + highest)/2;
+			if (array[middle] < userInput){
+				lowest = middle + 1;
+			}
+			else if (array[middle] > userInput){
+				highest = middle - 1;
+			}
+			else{
+				break;
+			}
 			
-			if (userInput == array[counter]){
-				
-				System.out.println("The number is placed at " + (counter + 1) + ".");
-				wasFound = true;
-				
+			if (lowest > highest){
+				System.out.println("That number could not be found.");
+				break;
 			}
 		}
 		
-		if (!wasFound){
-			
-			System.out.println("That number could not be found.");
-			
+		lowerBound = middle;
+		upperBound = middle;
+		
+		while (lowest <= highest){
+			if (middle - range >= 0){
+				if (array[middle - range] == userInput){
+					lowerBound --;
+				}
+			}
+			if (middle + range <= array.length - 1){
+				if (array[middle + range] == userInput){
+					upperBound ++;
+				}
+			}
+
+			if ((middle - range < 0)&&(middle + range >array.length - 1)){
+				break;
+			}
+			if ((middle - range < 0)&&(middle + range <= array.length - 1)){
+				if (array[middle + range] != userInput){
+					break;
+				}
+			}
+			if ((middle - range >= 0)&&(middle + range > array.length - 1)){
+				if (array[middle - range] != userInput){
+					break;
+				}
+			}
+			if ((middle - range >= 0)&&(middle + range <= array.length - 1)){
+				if ((array[middle + range] != userInput)&&(array[middle - range] != userInput)){
+					break;
+				}
+			}
+			range++;
+		}
+		if (lowest <= highest){
+			if (lowerBound != upperBound){
+				System.out.println("The numbers can be found from places " + (lowerBound + 1) + " - " + (upperBound + 1) + ".");
+			}
+			else{
+				System.out.println("The number can be found at place " + (middle + 1));
+			}
 		}
 	}
 	
@@ -90,7 +141,7 @@ public class BinarySearch {
 			numberSet[counter] = randomNumber.nextInt(1000) + 1;
 
 		}
-		
+
 		System.out.println(Arrays.toString(numberSet));
 		sortedNumberSet = sortArray(numberSet).clone(); 
 		System.out.println(Arrays.toString(sortedNumberSet));
